@@ -10,6 +10,7 @@ using namespace std;
 int dataList[] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71 };
 
 bool LinearSearch(int data[], int length, int target);
+bool BinarySearch(int data[], int length, int target);
 void ShowArray(int arrayIn[], int length);
 
 int main()
@@ -27,9 +28,9 @@ int main()
         { 
             cout << "\nWARNING : < Illegal input value! >\n";
             return 1; 
-        }                      
+        }
 
-        if (LinearSearch(dataList, sizeof(dataList) / sizeof(int), num1))
+        if (BinarySearch(dataList, sizeof(dataList) / sizeof(int), num1))
             cout << "Number founded" << "\n";
         else 
             cout << "Number not founded" << "\n";
@@ -59,6 +60,22 @@ bool LinearSearch(int data[], int length, int target)
     {
         if (data[i] == target) { return true; }
     }
+
+    return false;
+}
+
+bool BinarySearch(int data[], int length, int target)
+{
+    int ptr = 0, upperPtr = length - 1, lowerPtr = 0;
+
+    while (lowerPtr <= upperPtr)
+    {
+        ptr = (lowerPtr + upperPtr) / 2;
+
+        if (data[ptr] == target) { return true; }
+        else if (data[ptr] > target) { upperPtr = ptr - 1; }
+        else if (data[ptr] < target) { lowerPtr = ptr + 1; }
+    } 
 
     return false;
 }
